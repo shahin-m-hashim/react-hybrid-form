@@ -1,0 +1,83 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  z-index: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+.app,
+#root {
+  height: 100vh;
+  display: flex;
+  min-width: 320px;
+  overflow: hidden;
+  align-items: center;
+  scrollbar-width: none;
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
+  background-color: hsl(32, 67%, 82%);
+}
+
+form {
+  gap: 1rem;
+  width: 500px;
+  display: flex;
+  padding: 1rem;
+  flex-direction: column;
+  background-color: whitesmoke;
+}
+
+form .field {
+  gap: 0.75rem;
+  display: flex;
+  margin-bottom: 0.5rem;
+  flex-direction: column;
+}
+
+input,
+textarea {
+  resize: none;
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.75rem 0;
+  border-radius: 0.5rem;
+}
+
+.err-txt {
+  color: red;
+  font-size: 0.8rem;
+  padding-left: 0.5rem;
+}
+
+.err-field {
+  border: 2px solid red;
+}
+
+.submit-btn {
+  background-color: rgb(59 130 246);
+}
+
+.submit-btn:hover {
+  background-color: rgb(37 99 235);
+}
+
+.reset-btn {
+  background-color: rgb(239 68 68);
+}
+
+.reset-btn:hover {
+  background-color: rgb(220 38 38);
+}
