@@ -1,52 +1,48 @@
 /* eslint-disable react/prop-types */
-import { useState, forwardRef, useImperativeHandle, memo } from "react";
+import { useState, forwardRef, useImperativeHandle } from "react";
 
-const SelectField = memo(
-  forwardRef(
-    ({ name, label, style, defaultValue, updateFormInputs, options }, ref) => {
-      if (options.length === 0) {
-        throw new Error("SelectField component requires options");
-      }
+const SelectField = forwardRef(function SelectField(
+  { name, label, style, options },
+  ref
+) {
+  if (!name) {
+    throw new Error("Select field requires a name");
+  } else if (!label) {
+    throw new Error("Select field requires a label");
+  } else if (!options || options.length === 0) {
+    throw new Error("Select field requires options");
+  }
 
-      console.log(`Select field ${name} rendered`);
+  console.log(`Select field ${name} rendered`);
 
-      const initialSelected = defaultValue || options[0].value;
-      const [selected, setSelected] = useState(initialSelected);
+  const [selected, setSelected] = useState(options[0].value);
 
-      const handleChange = (e) => {
-        setSelected(e.target.value);
-        updateFormInputs(name, e.target.value);
-      };
+  const handleChange = (e) => setSelected(e.target.value);
 
-      const reset = () => {
-        setSelected(initialSelected);
-        updateFormInputs(name, initialSelected);
-      };
+  const reset = () => setSelected(options[0].value);
 
-      useImperativeHandle(ref, () => ({
-        reset,
-      }));
+  const getValue = () => selected;
 
-      return (
-        <div className="field">
-          {label && <label htmlFor={name}>{label}</label>}
-          <select
-            id={name}
-            name={name}
-            style={style}
-            value={selected}
-            onChange={handleChange}
-          >
-            {options.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
-      );
-    }
-  )
-);
+  useImperativeHandle(ref, () => ({ reset, getValue }));
+
+  return (
+    <div className="field">
+      {label && <label htmlFor={name}>{label}</label>}
+      <select
+        id={name}
+        name={name}
+        style={style}
+        value={selected}
+        onChange={handleChange}
+      >
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+});
 
 export default SelectField;

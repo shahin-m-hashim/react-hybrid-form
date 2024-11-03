@@ -1,57 +1,48 @@
 /* eslint-disable react/prop-types */
-import { useState, forwardRef, useImperativeHandle, memo } from "react";
+import { useState, forwardRef, useImperativeHandle } from "react";
 
-const RadioField = memo(
-  forwardRef(
-    ({ name, label, options, defaultValue, updateFormInputs }, ref) => {
-      console.log(`Radio field ${name} rendered`);
+const RadioField = forwardRef(function RadioField(
+  { name, label, options },
+  ref
+) {
+  if (!name) {
+    throw new Error("Radio field requires a name");
+  } else if (!label) {
+    throw new Error("Radio field requires a label");
+  } else if (!options || options.length === 0) {
+    throw new Error("Radio field requires options");
+  }
 
-      const [selected, setSelected] = useState(defaultValue);
+  console.log(`Radio field ${name} rendered`);
 
-      const handleChange = (e) => {
-        const newValue = e.target.value;
-        setSelected(newValue);
-        updateFormInputs(name, newValue);
-      };
+  const [selected, setSelected] = useState(options[0].value);
 
-      const reset = () => {
-        setSelected(defaultValue);
-        updateFormInputs(name, defaultValue);
-      };
+  const handleChange = (e) => setSelected(e.target.value);
+  const reset = () => setSelected(options[0].value);
+  const getValue = () => selected;
 
-      useImperativeHandle(ref, () => ({
-        reset,
-      }));
+  useImperativeHandle(ref, () => ({ reset, getValue }));
 
-      return (
-        <div className="field" style={{ flexDirection: "row" }}>
-          {label && <label>{label}</label>}
-          {options.map((option) => (
-            <div key={option.value}>
-              <label
-                htmlFor={option.value}
-                style={{
-                  gap: ".25rem",
-                  alignItems: "center",
-                  display: "inline-flex",
-                }}
-              >
-                {option.label}
-                <input
-                  name={name}
-                  type="radio"
-                  id={option.value}
-                  value={option.value}
-                  onChange={handleChange}
-                  checked={selected === option.value}
-                />
-              </label>
-            </div>
-          ))}
+  return (
+    <div className="field" style={{ flexDirection: "row" }}>
+      {label && <label>{label}</label>}
+      {options.map((option) => (
+        <div key={option.value}>
+          <label htmlFor={option.value} className="radio">
+            {option.label}
+            <input
+              name={name}
+              type="radio"
+              id={option.value}
+              value={option.value}
+              onChange={handleChange}
+              checked={selected === option.value}
+            />
+          </label>
         </div>
-      );
-    }
-  )
-);
+      ))}
+    </div>
+  );
+});
 
 export default RadioField;

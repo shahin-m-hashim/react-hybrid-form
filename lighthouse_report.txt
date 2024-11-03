@@ -1,0 +1,14 @@
+LIGHTHOUSE PERFORMANCE REPORT
+
+### Performance Metrics
+
+| Metric                   | No Throttling | 4x CPU Slowdown | 6x CPU Slowdown  | Fast 4G Network  | Slow 4G Network  | Slow 3G Network |
+|--------------------------|---------------|-----------------|------------------|------------------|------------------|-----------------|
+| Performance Score        | 93            | 84              | 93               | 93               | 93               | 91              |
+| Accessibility Score      | 91            | 91              | 91               | 91               | 91               | 91              |
+| Best Practices Score     | 100           | 100             | 100              | 100              | 100              | 100             |
+| First Contentful Paint   | 0.9 s         | 0.9 s           | 0.9 s            | 0.9 s            | 0.9 s            | 1.0 s           |
+| Largest Contentful Paint | 1.5 s         | 1.5 s           | 1.5 s            | 1.5 s            | 1.5 s            | 1.5 s           |
+| Total Blocking Time      | 0 ms          | 40 ms           | 0 ms             | 0 ms             | 10 ms            | 110 ms          |
+| Cumulative Layout Shift  | 0.061         | 0.061           | 0.061            | 0.061            | 0.061            | 0.061           |
+| Speed Index              | 0.9 s         | 7.9 s           | 0.9 s            | 0.9 s            | 1.0 s            | 1.2 s           |

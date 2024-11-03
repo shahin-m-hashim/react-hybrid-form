@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { memo, useRef } from "react";
 import InputField from "./InputField";
 import RadioField from "./RadioField";
@@ -10,48 +9,43 @@ import { validateDescription, validateName } from "../utils/validator";
 const Form = memo(function Form() {
   console.log("Form rendered");
 
+  const form = useRef({});
+
+  /*
+    For Default Values
+    const form = useRef({
+      name: "default name",
+      description:
+        "Add Your default description here. This is a default description.",
+    });
+  */
+
   const inputRefs = useRef({});
 
-  const form = useRef({
-    name: "",
-    interests: [],
-    gender: "male",
-    description: "",
-    question: "Punjab",
-  });
-
-  const updateFormInputs = useCallback((input, value) => {
-    form.current = {
-      ...form.current,
-      [input]: value,
-    };
-  }, []);
-
-  const handleReset = useCallback(() => {
+  const handleReset = () => {
     Object.values(inputRefs.current).forEach((inputRef) => {
       inputRef.reset();
     });
-  }, []);
+  };
 
-  const handleSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-      let isFormValid = true;
+    let isFormValid = true;
 
-      Object.values(inputRefs.current).forEach((inputRef) => {
-        if (inputRef.validate && !inputRef.validate()) {
-          isFormValid = false;
-        }
-      });
-
-      if (isFormValid) {
-        console.log(form.current);
-        handleReset();
+    Object.entries(inputRefs.current).forEach(([key, inputRef]) => {
+      if (inputRef.validate && !inputRef.validate()) {
+        isFormValid = false;
+      } else {
+        form.current[key] = inputRef.getValue();
       }
-    },
-    [inputRefs, handleReset]
-  );
+    });
+
+    if (isFormValid) {
+      console.log(form.current);
+      handleReset();
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -61,18 +55,17 @@ const Form = memo(function Form() {
         label="Name"
         placeholder="Name"
         validate={validateName}
-        updateFormInputs={updateFormInputs}
+        defaultValue={form.current.name}
         ref={(el) => (inputRefs.current["name"] = el)}
       />
 
       <TextAreaField
         rows="5"
-        type="text"
         name="description"
         label="Description"
         placeholder="Description"
         validate={validateDescription}
-        updateFormInputs={updateFormInputs}
+        defaultValue={form.current.description}
         ref={(el) => (inputRefs.current["description"] = el)}
       />
 
@@ -80,7 +73,6 @@ const Form = memo(function Form() {
         name="question"
         label="Capital of India?"
         style={{ padding: "0.5rem" }}
-        updateFormInputs={updateFormInputs}
         options={[
           { value: "Punjab", label: "Punjab" },
           { value: "Kerala", label: "Kerala" },
@@ -92,12 +84,10 @@ const Form = memo(function Form() {
       <RadioField
         name="gender"
         label="Gender?"
-        defaultValue={form.current.gender}
         options={[
           { value: "male", label: "Male" },
           { value: "female", label: "Female" },
         ]}
-        updateFormInputs={updateFormInputs}
         ref={(el) => (inputRefs.current["gender"] = el)}
       />
 
@@ -110,7 +100,6 @@ const Form = memo(function Form() {
           { value: "sleep", label: "Sleep" },
           { value: "music", label: "Music" },
         ]}
-        updateFormInputs={updateFormInputs}
         ref={(el) => (inputRefs.current["interests"] = el)}
       />
       <button type="submit" className="submit-btn">

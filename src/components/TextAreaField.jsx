@@ -1,56 +1,57 @@
 /* eslint-disable react/prop-types */
 
-import { forwardRef, memo, useImperativeHandle, useState } from "react";
+import { forwardRef, useImperativeHandle, useState } from "react";
 
-const TextAreaField = memo(
-  forwardRef(
-    (
-      { name, label, placeholder, rows, style, validate, updateFormInputs },
-      ref
-    ) => {
-      console.log(`Text area field ${name} rendered`);
-      const [input, setInput] = useState({ value: "", error: null });
+const TextAreaField = forwardRef(function TextAreaField(
+  { name, rows = 3, label, validate, placeholder, defaultValue },
+  ref
+) {
+  if (!name) {
+    throw new Error("Text area field requires a name");
+  }
 
-      const validateInput = () => {
-        const error = validate(input.value);
-        setInput((prev) => ({ ...prev, error }));
-        return !error;
-      };
+  console.log(`Text area field ${name} rendered`);
 
-      const handleChange = (e) => {
-        const value = e.target.value;
-        const error = validate(value);
-        setInput({ value, error });
-        updateFormInputs(name, value);
-      };
+  const [input, setInput] = useState({
+    value: defaultValue || "",
+    error: null,
+  });
 
-      const reset = () => {
-        setInput({ value: "", error: null });
-        updateFormInputs(name, "");
-      };
+  const validateInput = () => {
+    const error = validate(input.value);
+    setInput((prev) => ({ ...prev, error }));
+    return !error;
+  };
 
-      useImperativeHandle(ref, () => ({
-        validate: validateInput,
-        reset,
-      }));
+  const handleChange = (e) => {
+    const value = e.target.value;
+    const error = validate(value);
+    setInput({ value, error });
+  };
 
-      return (
-        <div className="field" style={{ flexDirection: "column" }}>
-          {label && <label htmlFor={name}>{label}</label>}
-          <textarea
-            id={name}
-            rows={rows}
-            style={style}
-            value={input.value}
-            onChange={handleChange}
-            placeholder={placeholder}
-            className={input.error ? "err-field" : ""}
-          />
-          {input.error && <p className="err-txt">{input.error}</p>}
-        </div>
-      );
-    }
-  )
-);
+  const reset = () => setInput({ value: defaultValue || "", error: null });
+  const getValue = () => input.value;
+
+  useImperativeHandle(ref, () => ({
+    reset,
+    getValue,
+    validate: validateInput,
+  }));
+
+  return (
+    <div className="field" style={{ flexDirection: "column" }}>
+      {label && <label htmlFor={name}>{label}</label>}
+      <textarea
+        id={name}
+        rows={rows}
+        value={input.value}
+        onChange={handleChange}
+        placeholder={placeholder}
+        className={input.error ? "err-field" : ""}
+      />
+      {input.error && <p className="err-txt">{input.error}</p>}
+    </div>
+  );
+});
 
 export default TextAreaField;

@@ -47,6 +47,13 @@ textarea {
   border: 1px solid #ccc;
 }
 
+.radio,
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 button {
   width: 100%;
   border: none;

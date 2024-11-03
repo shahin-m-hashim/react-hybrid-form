@@ -13,15 +13,11 @@ const validateName = (value) => {
 const validateDescription = (value) => {
   if (!value) {
     return "Description is required";
+  } else if (value.length < 10) {
+    return "Description must be at least 10 characters";
+  } else if (value.length > 500) {
+    return "Description must be at most 100 characters";
   }
-
-  /*
-    else if (value.length < 10) {
-      return "Description must be at least 10 characters";
-    } else if (value.length > 100) {
-      return "Description must be at most 100 characters";
-    }
-  */
 
   return null;
 };
