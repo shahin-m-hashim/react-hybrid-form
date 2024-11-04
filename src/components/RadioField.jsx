@@ -2,7 +2,7 @@
 import { useState, forwardRef, useImperativeHandle } from "react";
 
 const RadioField = forwardRef(function RadioField(
-  { name, label, options },
+  { name, label, options, fieldClass, labelClass, optionsClass, optionClass },
   ref
 ) {
   if (!name) {
@@ -17,30 +17,30 @@ const RadioField = forwardRef(function RadioField(
 
   const [selected, setSelected] = useState(options[0].value);
 
-  const handleChange = (e) => setSelected(e.target.value);
-  const reset = () => setSelected(options[0].value);
   const getValue = () => selected;
+  const reset = () => setSelected(options[0].value);
+  const handleChange = (e) => setSelected(e.target.value);
 
   useImperativeHandle(ref, () => ({ reset, getValue }));
 
   return (
-    <div className="field" style={{ flexDirection: "row" }}>
-      {label && <label>{label}</label>}
-      {options.map((option) => (
-        <div key={option.value}>
-          <label htmlFor={option.value} className="radio">
-            {option.label}
+    <div className={fieldClass}>
+      <span className={labelClass}>{label}</span>
+      <div className={optionsClass}>
+        {options.map((option) => (
+          <div key={option.value} className={optionClass}>
             <input
-              name={name}
               type="radio"
+              name={name}
               id={option.value}
               value={option.value}
               onChange={handleChange}
               checked={selected === option.value}
             />
-          </label>
-        </div>
-      ))}
+            <label htmlFor={option.value}>{option.label}</label>
+          </div>
+        ))}
+      </div>
     </div>
   );
 });

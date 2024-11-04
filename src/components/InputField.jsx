@@ -3,7 +3,19 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 
 const InputField = forwardRef(function InputField(
-  { type, name, label, validate, placeholder, defaultValue },
+  {
+    type,
+    name,
+    label,
+    validate,
+    fieldClass,
+    inputClass,
+    labelClass,
+    errorClass,
+    placeholder,
+    defaultValue,
+    autoComplete,
+  },
   ref
 ) {
   if (!name) {
@@ -41,17 +53,26 @@ const InputField = forwardRef(function InputField(
   }));
 
   return (
-    <div className="field">
-      {label && <label htmlFor={name}>{label}</label>}
+    <div className={fieldClass}>
+      {label && (
+        <label htmlFor={name} className={labelClass}>
+          {label}
+        </label>
+      )}
       <input
         id={name}
         type={type}
+        name={name}
         value={input.value}
+        className={inputClass}
         onChange={handleChange}
         placeholder={placeholder}
-        className={input.error ? "err-field" : ""}
+        autoComplete={autoComplete}
+        style={{
+          border: input.error ? "2px solid red" : "",
+        }}
       />
-      {input.error && <p className="err-txt">{input.error}</p>}
+      {input.error && <p className={errorClass}>{input.error}</p>}
     </div>
   );
 });

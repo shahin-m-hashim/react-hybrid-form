@@ -2,7 +2,7 @@
 import { useState, forwardRef, useImperativeHandle } from "react";
 
 const CheckboxField = forwardRef(function CheckboxField(
-  { name, label, options, style },
+  { name, label, options, fieldClass, labelClass, optionsClass, optionClass },
   ref
 ) {
   if (!name) {
@@ -32,12 +32,12 @@ const CheckboxField = forwardRef(function CheckboxField(
   useImperativeHandle(ref, () => ({ reset, getValue }));
 
   return (
-    <div className="field" style={{ flexDirection: "row" }}>
-      <div style={{ display: "flex", gap: "1rem" }}>
-        {label && <label>{label}</label>}
+    <div className={fieldClass}>
+      <span className={labelClass}>{label}</span>
+      <div className={optionsClass}>
         {options.map((option) => (
-          <div key={option.value}>
-            <label htmlFor={option.value} className="checkbox" style={style}>
+          <div key={option.value} className={optionClass}>
+            <label htmlFor={option.value}>
               {option.label}
               <input
                 name={name}

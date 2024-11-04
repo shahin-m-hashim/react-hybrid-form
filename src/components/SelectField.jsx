@@ -2,7 +2,7 @@
 import { useState, forwardRef, useImperativeHandle } from "react";
 
 const SelectField = forwardRef(function SelectField(
-  { name, label, style, options },
+  { name, label, options, fieldClass, labelClass, optionsClass, optionClass },
   ref
 ) {
   if (!name) {
@@ -26,17 +26,21 @@ const SelectField = forwardRef(function SelectField(
   useImperativeHandle(ref, () => ({ reset, getValue }));
 
   return (
-    <div className="field">
-      {label && <label htmlFor={name}>{label}</label>}
+    <div className={fieldClass}>
+      <span className={labelClass}>{label}</span>
       <select
         id={name}
         name={name}
-        style={style}
         value={selected}
+        className={optionsClass}
         onChange={handleChange}
       >
         {options.map((option) => (
-          <option key={option.value} value={option.value}>
+          <option
+            key={option.value}
+            value={option.value}
+            className={optionClass}
+          >
             {option.label}
           </option>
         ))}

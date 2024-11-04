@@ -1,9 +1,23 @@
 /* eslint-disable react/prop-types */
-
-import { forwardRef, useImperativeHandle, useState } from "react";
+import { useState, forwardRef, useImperativeHandle } from "react";
 
 const TextAreaField = forwardRef(function TextAreaField(
-  { name, rows = 3, label, validate, placeholder, defaultValue },
+  {
+    name,
+    rows,
+    cols,
+    label,
+    validate,
+    fieldClass,
+    labelClass,
+    errorClass,
+    fieldStyles,
+    placeholder,
+    labelStyles,
+    inputStyles,
+    errorStyles,
+    defaultValue,
+  },
   ref
 ) {
   if (!name) {
@@ -39,17 +53,31 @@ const TextAreaField = forwardRef(function TextAreaField(
   }));
 
   return (
-    <div className="field" style={{ flexDirection: "column" }}>
-      {label && <label htmlFor={name}>{label}</label>}
+    <div className={fieldClass} style={fieldStyles}>
+      {label && (
+        <label htmlFor={name} className={labelClass} style={labelStyles}>
+          {label}
+        </label>
+      )}
       <textarea
         id={name}
         rows={rows}
+        cols={cols}
+        name={name}
         value={input.value}
         onChange={handleChange}
         placeholder={placeholder}
-        className={input.error ? "err-field" : ""}
+        className={input.error ? "err-field" : inputStyles} // Default error styling
+        style={{
+          border: input.error ? "2px solid red" : "", // Default error styling
+          ...inputStyles,
+        }}
       />
-      {input.error && <p className="err-txt">{input.error}</p>}
+      {input.error && (
+        <p className={errorClass} style={errorStyles}>
+          {input.error}
+        </p>
+      )}
     </div>
   );
 });

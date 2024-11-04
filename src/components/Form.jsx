@@ -18,11 +18,6 @@ const Form = memo(function Form() {
     if (isFormValid()) {
       console.log(form.current);
 
-      // Do Whatever you want with the form data
-      // Send it to backend asynchronously
-      // Save it in local storage
-      // All Within seconds using the Hybrid Form
-
       resetForm();
     }
   };
