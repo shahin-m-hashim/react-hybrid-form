@@ -11,12 +11,9 @@ const TextAreaField = forwardRef(function TextAreaField(
     fieldClass,
     labelClass,
     errorClass,
-    fieldStyles,
     placeholder,
-    labelStyles,
-    inputStyles,
-    errorStyles,
     defaultValue,
+    textareaClass,
   },
   ref
 ) {
@@ -53,9 +50,9 @@ const TextAreaField = forwardRef(function TextAreaField(
   }));
 
   return (
-    <div className={fieldClass} style={fieldStyles}>
+    <div className={fieldClass}>
       {label && (
-        <label htmlFor={name} className={labelClass} style={labelStyles}>
+        <label htmlFor={name} className={labelClass}>
           {label}
         </label>
       )}
@@ -67,17 +64,12 @@ const TextAreaField = forwardRef(function TextAreaField(
         value={input.value}
         onChange={handleChange}
         placeholder={placeholder}
-        className={input.error ? "err-field" : inputStyles} // Default error styling
+        className={textareaClass}
         style={{
-          border: input.error ? "2px solid red" : "", // Default error styling
-          ...inputStyles,
+          border: input.error ? "2px solid red" : "",
         }}
       />
-      {input.error && (
-        <p className={errorClass} style={errorStyles}>
-          {input.error}
-        </p>
-      )}
+      {input.error && <p className={errorClass}>{input.error}</p>}
     </div>
   );
 });

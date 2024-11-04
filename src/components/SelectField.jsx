@@ -27,7 +27,9 @@ const SelectField = forwardRef(function SelectField(
 
   return (
     <div className={fieldClass}>
-      <span className={labelClass}>{label}</span>
+      <label htmlFor={name} className={labelClass}>
+        {label}
+      </label>
       <select
         id={name}
         name={name}

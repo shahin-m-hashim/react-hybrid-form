@@ -36,19 +36,21 @@ const CheckboxField = forwardRef(function CheckboxField(
       <span className={labelClass}>{label}</span>
       <div className={optionsClass}>
         {options.map((option) => (
-          <div key={option.value} className={optionClass}>
-            <label htmlFor={option.value}>
-              {option.label}
-              <input
-                name={name}
-                type="checkbox"
-                id={option.value}
-                value={option.value}
-                onChange={handleChange}
-                checked={selected.includes(option.value)}
-              />
-            </label>
-          </div>
+          <label
+            key={option.value}
+            htmlFor={option.value}
+            className={optionClass}
+          >
+            <span>{option.label}</span>
+            <input
+              name={name}
+              type="checkbox"
+              id={option.value}
+              value={option.value}
+              onChange={handleChange}
+              checked={selected.includes(option.value)}
+            />
+          </label>
         ))}
       </div>
     </div>

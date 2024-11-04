@@ -28,16 +28,26 @@ const Form = memo(function Form() {
       <InputField
         type="text"
         name="name"
-        label="Name"
+        label="Name:"
+        autoComplete="on"
         placeholder="Name"
+        labelClass="label"
+        fieldClass="field"
+        inputClass="input"
+        errorClass="err-txt"
         ref={register("name")}
         validate={validateName}
       />
 
       <TextAreaField
         rows="5"
+        // cols="10"
         name="description"
-        label="Description"
+        labelClass="label"
+        fieldClass="field"
+        label="Description:"
+        errorClass="err-txt"
+        textareaClass="textarea"
         placeholder="Description"
         ref={register("description")}
         validate={validateDescription}
@@ -46,7 +56,9 @@ const Form = memo(function Form() {
       <SelectField
         name="question"
         label="Capital of India?"
-        style={{ padding: "0.5rem" }}
+        fieldClass="field"
+        labelClass="label"
+        optionsClass="input"
         options={[
           { value: "Punjab", label: "Punjab" },
           { value: "Kerala", label: "Kerala" },
@@ -58,6 +70,10 @@ const Form = memo(function Form() {
       <RadioField
         name="gender"
         label="Gender?"
+        fieldClass="field"
+        labelClass="label"
+        optionsClass="options"
+        optionClass="option"
         options={[
           { value: "male", label: "Male" },
           { value: "female", label: "Female" },
@@ -68,6 +84,10 @@ const Form = memo(function Form() {
       <CheckboxField
         name="interests"
         label="Interests?"
+        labelClass="label"
+        fieldClass="field"
+        optionsClass="options"
+        optionClass="option"
         options={[
           { value: "eat", label: "Eat" },
           { value: "play", label: "Play" },

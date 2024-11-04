@@ -5,7 +5,6 @@
   z-index: 0;
   padding: 0;
   box-sizing: border-box;
-  scroll-behavior: smooth;
 }
 
 html,
@@ -32,28 +31,6 @@ form {
   background-color: whitesmoke;
 }
 
-form .field {
-  gap: 0.75rem;
-  display: flex;
-  margin-bottom: 0.5rem;
-  flex-direction: column;
-}
-
-input,
-textarea {
-  resize: none;
-  padding: 0.75rem;
-  border-radius: 0.25rem;
-  border: 1px solid #ccc;
-}
-
-.radio,
-.checkbox {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
 button {
   width: 100%;
   border: none;
@@ -63,14 +40,47 @@ button {
   border-radius: 0.5rem;
 }
 
+.field {
+  gap: 0.5rem;
+  resize: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+}
+
+.options {
+  gap: 1rem;
+  display: flex;
+}
+
+.option {
+  gap: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.textarea {
+  resize: none;
+  padding: 0.5rem;
+  width: 100%;
+}
+
 .err-txt {
   color: red;
   font-size: 0.8rem;
   padding-left: 0.5rem;
-}
-
-.err-field {
-  border: 2px solid red;
 }
 
 .submit-btn {
