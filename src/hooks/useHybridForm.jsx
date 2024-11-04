@@ -1,7 +1,7 @@
 import { useRef } from "react";
 
 export default function useHybridForm() {
-  const form = useRef({});
+  const form = {};
   const fieldRefs = useRef({});
 
   const resetForm = () => {
@@ -17,7 +17,7 @@ export default function useHybridForm() {
       if (fieldRef.validate && !fieldRef.validate()) {
         isValid = false;
       } else {
-        form.current[key] = fieldRef.getValue();
+        form[key] = fieldRef.getValue();
       }
     });
 
@@ -26,5 +26,12 @@ export default function useHybridForm() {
 
   const register = (key) => (fieldRef) => (fieldRefs.current[key] = fieldRef);
 
-  return [form, resetForm, isFormValid, register];
+  const getFormData = () => {
+    if (isFormValid()) {
+      return form;
+    }
+    return null;
+  };
+
+  return [register, getFormData, resetForm];
 }

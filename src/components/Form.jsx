@@ -10,14 +10,15 @@ import { validateDescription, validateName } from "../utils/validator";
 const Form = memo(function Form() {
   console.log("Form rendered");
 
-  const [form, resetForm, isFormValid, register] = useHybridForm();
+  const [register, getFormData, resetForm] = useHybridForm();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (isFormValid()) {
-      console.log(form.current);
+    const data = getFormData();
 
+    if (data) {
+      console.log(data);
       resetForm();
     }
   };
