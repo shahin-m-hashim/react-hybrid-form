@@ -13,6 +13,7 @@ const InputField = forwardRef(function InputField(
   }
 
   console.log(`Input field ${name} rendered`);
+
   const [input, setInput] = useState({
     value: defaultValue || "",
     error: null,
@@ -30,8 +31,8 @@ const InputField = forwardRef(function InputField(
     setInput({ value, error });
   };
 
-  const reset = () => setInput({ value: defaultValue || "", error: null });
   const getValue = () => input.value;
+  const reset = () => setInput({ value: defaultValue || "", error: null });
 
   useImperativeHandle(ref, () => ({
     reset,

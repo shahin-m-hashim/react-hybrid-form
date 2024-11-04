@@ -1,49 +1,29 @@
-import { memo, useRef } from "react";
+import { memo } from "react";
 import InputField from "./InputField";
 import RadioField from "./RadioField";
 import SelectField from "./SelectField";
 import TextAreaField from "./TextAreaField";
 import CheckboxField from "./CheckboxField";
+import useHybridForm from "../hooks/useHybridForm";
 import { validateDescription, validateName } from "../utils/validator";
 
 const Form = memo(function Form() {
   console.log("Form rendered");
 
-  const form = useRef({});
-
-  /*
-    For Default Values
-    const form = useRef({
-      name: "default name",
-      description:
-        "Add Your default description here. This is a default description.",
-    });
-  */
-
-  const inputRefs = useRef({});
-
-  const handleReset = () => {
-    Object.values(inputRefs.current).forEach((inputRef) => {
-      inputRef.reset();
-    });
-  };
+  const [form, resetForm, isFormValid, register] = useHybridForm();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    let isFormValid = true;
-
-    Object.entries(inputRefs.current).forEach(([key, inputRef]) => {
-      if (inputRef.validate && !inputRef.validate()) {
-        isFormValid = false;
-      } else {
-        form.current[key] = inputRef.getValue();
-      }
-    });
-
-    if (isFormValid) {
+    if (isFormValid()) {
       console.log(form.current);
-      handleReset();
+
+      // Do Whatever you want with the form data
+      // Send it to backend asynchronously
+      // Save it in local storage
+      // All Within seconds using the Hybrid Form
+
+      resetForm();
     }
   };
 
@@ -54,9 +34,8 @@ const Form = memo(function Form() {
         name="name"
         label="Name"
         placeholder="Name"
+        ref={register("name")}
         validate={validateName}
-        defaultValue={form.current.name}
-        ref={(el) => (inputRefs.current["name"] = el)}
       />
 
       <TextAreaField
@@ -64,9 +43,8 @@ const Form = memo(function Form() {
         name="description"
         label="Description"
         placeholder="Description"
+        ref={register("description")}
         validate={validateDescription}
-        defaultValue={form.current.description}
-        ref={(el) => (inputRefs.current["description"] = el)}
       />
 
       <SelectField
@@ -78,7 +56,7 @@ const Form = memo(function Form() {
           { value: "Kerala", label: "Kerala" },
           { value: "New Delhi", label: "New Delhi" },
         ]}
-        ref={(el) => (inputRefs.current["question"] = el)}
+        ref={register("question")}
       />
 
       <RadioField
@@ -88,7 +66,7 @@ const Form = memo(function Form() {
           { value: "male", label: "Male" },
           { value: "female", label: "Female" },
         ]}
-        ref={(el) => (inputRefs.current["gender"] = el)}
+        ref={register("gender")}
       />
 
       <CheckboxField
@@ -100,12 +78,12 @@ const Form = memo(function Form() {
           { value: "sleep", label: "Sleep" },
           { value: "music", label: "Music" },
         ]}
-        ref={(el) => (inputRefs.current["interests"] = el)}
+        ref={register("interests")}
       />
       <button type="submit" className="submit-btn">
         Submit
       </button>
-      <button type="reset" onClick={handleReset} className="reset-btn">
+      <button type="reset" onClick={resetForm} className="reset-btn">
         Reset
       </button>
     </form>
