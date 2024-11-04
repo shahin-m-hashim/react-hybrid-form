@@ -7,7 +7,7 @@ const TextAreaField = forwardRef(function TextAreaField(
     rows,
     cols,
     label,
-    validate,
+    validate = () => {},
     fieldClass,
     labelClass,
     errorClass,

@@ -24,10 +24,10 @@ body,
 
 form {
   gap: 1rem;
-  width: 500px;
+  width: 800px;
   display: flex;
   padding: 1rem;
-  flex-direction: column;
+  flex-direction: row;
   background-color: whitesmoke;
 }
 

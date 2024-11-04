@@ -7,7 +7,7 @@ const InputField = forwardRef(function InputField(
     type,
     name,
     label,
-    validate,
+    validate = () => {},
     fieldClass,
     inputClass,
     labelClass,
@@ -67,7 +67,7 @@ const InputField = forwardRef(function InputField(
         className={inputClass}
         onChange={handleChange}
         placeholder={placeholder}
-        autoComplete={autoComplete}
+        autoComplete={autoComplete || "on"}
         style={{
           border: input.error ? "2px solid red" : "",
         }}
