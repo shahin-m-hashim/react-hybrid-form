@@ -4,13 +4,9 @@ export default function useHybridForm() {
   const form = {};
   const fieldRefs = useRef({});
 
-  const resetForm = () => {
-    Object.values(fieldRefs.current).forEach((fieldRef) => {
-      fieldRef.reset();
-    });
-  };
+  const register = (key) => (fieldRef) => (fieldRefs.current[key] = fieldRef);
 
-  const isFormValid = () => {
+  const getFormData = () => {
     let isValid = true;
 
     Object.entries(fieldRefs.current).forEach(([key, fieldRef]) => {
@@ -21,16 +17,13 @@ export default function useHybridForm() {
       }
     });
 
-    return isValid;
+    return isValid ? form : null;
   };
 
-  const register = (key) => (fieldRef) => (fieldRefs.current[key] = fieldRef);
-
-  const getFormData = () => {
-    if (isFormValid()) {
-      return form;
-    }
-    return null;
+  const resetForm = () => {
+    Object.values(fieldRefs.current).forEach((fieldRef) => {
+      fieldRef.reset();
+    });
   };
 
   return [register, getFormData, resetForm];
