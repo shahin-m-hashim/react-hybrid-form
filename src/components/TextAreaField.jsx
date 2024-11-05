@@ -7,17 +7,19 @@ const TextAreaField = forwardRef(function TextAreaField(
     rows,
     cols,
     label,
-    validate = () => {},
     fieldClass,
     labelClass,
     errorClass,
     placeholder,
     defaultValue,
     textareaClass,
+    validate = () => {},
   },
   ref
 ) {
-  if (!name) {
+  if (!ref) {
+    throw new Error("All react hybrid form fields must have a ref");
+  } else if (!name) {
     throw new Error("Text area field requires a name");
   }
 

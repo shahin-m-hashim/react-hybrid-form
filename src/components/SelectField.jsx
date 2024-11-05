@@ -5,7 +5,9 @@ const SelectField = forwardRef(function SelectField(
   { name, label, options, fieldClass, labelClass, optionsClass, optionClass },
   ref
 ) {
-  if (!name) {
+  if (!ref) {
+    throw new Error("All react hybrid form fields must have a ref");
+  } else if (!name) {
     throw new Error("Select field requires a name");
   } else if (!label) {
     throw new Error("Select field requires a label");

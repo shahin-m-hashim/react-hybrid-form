@@ -5,7 +5,9 @@ const RadioField = forwardRef(function RadioField(
   { name, label, options, fieldClass, labelClass, optionsClass, optionClass },
   ref
 ) {
-  if (!name) {
+  if (!ref) {
+    throw new Error("All react hybrid form fields must have a ref");
+  } else if (!name) {
     throw new Error("Radio field requires a name");
   } else if (!label) {
     throw new Error("Radio field requires a label");

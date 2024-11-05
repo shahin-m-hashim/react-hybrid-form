@@ -44,7 +44,13 @@ const HybridForm = memo(function HybridForm() {
         <InputField
           type="text"
           name="name"
+          label="Name:"
+          autoComplete="on"
           placeholder="Name"
+          labelClass="label"
+          fieldClass="field"
+          inputClass="input"
+          errorClass="err-txt"
           ref={register("name")}
           validate={validateName}
         />
@@ -53,6 +59,10 @@ const HybridForm = memo(function HybridForm() {
           type="date"
           name="dueDate"
           label="Due Date:"
+          labelClass="label"
+          fieldClass="field"
+          inputClass="input"
+          errorClass="err-txt"
           ref={register("dueDate")}
           validate={validateDueDate}
         />
@@ -60,6 +70,11 @@ const HybridForm = memo(function HybridForm() {
         <InputField
           type="email"
           name="email"
+          label="Email:"
+          labelClass="label"
+          fieldClass="field"
+          inputClass="input"
+          errorClass="err-txt"
           placeholder="Email"
           ref={register("email")}
           validate={validateEmail}
@@ -67,9 +82,15 @@ const HybridForm = memo(function HybridForm() {
 
         <PasswordField
           name="password"
+          label="Password:"
+          labelClass="label"
+          fieldClass="field"
+          inputClass="input"
+          errorClass="err-txt"
           ref={register("password")}
           validate={validatePassword}
           placeholder="Enter password"
+          toggleVisibilityClass="togglePwdVisibility"
         />
       </div>
 
@@ -83,8 +104,13 @@ const HybridForm = memo(function HybridForm() {
       >
         <TextAreaField
           rows="5"
+          // cols="10"
           name="description"
+          labelClass="label"
+          fieldClass="field"
           label="Description:"
+          errorClass="err-txt"
+          textareaClass="textarea"
           placeholder="Description"
           ref={register("description")}
           validate={validateDescription}
@@ -92,6 +118,9 @@ const HybridForm = memo(function HybridForm() {
 
         <SelectField
           name="question"
+          fieldClass="field"
+          labelClass="label"
+          optionsClass="input"
           label="Capital of India?"
           options={[
             { value: "Punjab", label: "Punjab" },
@@ -104,6 +133,10 @@ const HybridForm = memo(function HybridForm() {
         <RadioField
           name="gender"
           label="Gender?"
+          fieldClass="field"
+          labelClass="label"
+          optionClass="option"
+          optionsClass="options"
           options={[
             { value: "male", label: "Male" },
             { value: "female", label: "Female" },
@@ -114,6 +147,10 @@ const HybridForm = memo(function HybridForm() {
         <CheckboxField
           name="interests"
           label="Interests?"
+          labelClass="label"
+          fieldClass="field"
+          optionClass="option"
+          optionsClass="options"
           options={[
             { value: "eat", label: "Eat" },
             { value: "play", label: "Play" },

@@ -18,7 +18,9 @@ const InputField = forwardRef(function InputField(
   },
   ref
 ) {
-  if (!name) {
+  if (!ref) {
+    throw new Error("All react hybrid form fields must have a ref");
+  } else if (!name) {
     throw new Error("Input field requires a name");
   } else if (!type) {
     throw new Error("Input field requires a type");
@@ -69,6 +71,7 @@ const InputField = forwardRef(function InputField(
         placeholder={placeholder}
         autoComplete={autoComplete || "on"}
         style={{
+          width: "100%",
           border: input.error ? "2px solid red" : "",
         }}
       />

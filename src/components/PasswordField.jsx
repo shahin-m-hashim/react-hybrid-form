@@ -14,14 +14,17 @@ const PasswordField = forwardRef(function PasswordField(
     labelClass,
     errorClass,
     placeholder,
+    toggleVisibilityClass,
+    requiresConfirmation = true,
+    requiresTogglingVisibility = true,
   },
   ref
 ) {
-  if (!name) {
+  if (!ref) {
+    throw new Error("All react hybrid form fields must have a ref");
+  } else if (!name) {
     throw new Error("Password field requires a name");
-  }
-
-  if (!validate) {
+  } else if (!validate) {
     throw new Error("Password field requires a validation function");
   }
 
@@ -65,7 +68,7 @@ const PasswordField = forwardRef(function PasswordField(
     const cError =
       value === input.cPassword.value ? null : "Passwords do not match";
     setInput({
-      password: { value, error },
+      password: { value, error, show: input.password.show },
       cPassword: { value: input.cPassword.value, error: cError },
     });
   };
@@ -76,7 +79,7 @@ const PasswordField = forwardRef(function PasswordField(
       value === input.password.value ? null : "Passwords do not match";
     setInput((prev) => ({
       ...prev,
-      cPassword: { value, error },
+      cPassword: { value, error, show: prev.cPassword.show },
     }));
   };
 
@@ -90,8 +93,12 @@ const PasswordField = forwardRef(function PasswordField(
 
   const validateOnSubmit = () => {
     const isPasswordValid = validatePassword();
-    const isConfirmPasswordValid = validateCPassword();
-    return isPasswordValid && isConfirmPasswordValid;
+    if (requiresConfirmation) {
+      const isCPasswordValid = validateCPassword();
+      return isPasswordValid && isCPasswordValid;
+    } else {
+      return isPasswordValid;
+    }
   };
 
   useImperativeHandle(ref, () => ({
@@ -118,25 +125,24 @@ const PasswordField = forwardRef(function PasswordField(
             value={input.password.value}
             onChange={handlePasswordChange}
             type={input.password.show ? "text" : "password"}
-            style={{ border: input.password.error ? "2px solid red" : "" }}
-          />
-          <img
-            alt={input.password.show ? "show" : "hide"}
-            src={input.password.show ? showPwd : hidePwd}
             style={{
-              top: "0.4rem",
-              right: "0.5rem",
-              width: "1.25em",
-              cursor: "pointer",
-              position: "absolute",
-            }}
-            onClick={() => {
-              setInput((prev) => ({
-                ...prev,
-                password: { ...prev.password, show: !prev.password.show },
-              }));
+              width: "100%",
+              border: input.password.error ? "2px solid red" : "",
             }}
           />
+          {requiresTogglingVisibility && (
+            <img
+              alt={input.password.show ? "show" : "hide"}
+              src={input.password.show ? showPwd : hidePwd}
+              className={toggleVisibilityClass}
+              onClick={() => {
+                setInput((prev) => ({
+                  ...prev,
+                  password: { ...prev.password, show: !prev.password.show },
+                }));
+              }}
+            />
+          )}
         </div>
 
         {input.password.error && (
@@ -144,45 +150,49 @@ const PasswordField = forwardRef(function PasswordField(
         )}
       </div>
 
-      <div className={fieldClass}>
-        {label && (
-          <label htmlFor={`${name}-cPwd`} className={labelClass}>
-            Confirm {label}
-          </label>
-        )}
-        <div style={{ position: "relative" }}>
-          <input
-            id={`${name}-cPwd`}
-            name={`${name}-cPwd`}
-            className={inputClass}
-            value={input.cPassword.value}
-            placeholder="Confirm Password"
-            onChange={handleCPasswordChange}
-            type={input.cPassword.show ? "text" : "password"}
-            style={{ border: input.cPassword.error ? "2px solid red" : "" }}
-          />
-          <img
-            alt={input.cPassword.show ? "show" : "hide"}
-            src={input.cPassword.show ? showPwd : hidePwd}
-            style={{
-              top: "0.4rem",
-              right: "0.5rem",
-              width: "1.25em",
-              cursor: "pointer",
-              position: "absolute",
-            }}
-            onClick={() => {
-              setInput((prev) => ({
-                ...prev,
-                cPassword: { ...prev.cPassword, show: !prev.cPassword.show },
-              }));
-            }}
-          />
+      {requiresConfirmation && (
+        <div className={fieldClass}>
+          {label && (
+            <label htmlFor={`${name}-cPwd`} className={labelClass}>
+              Confirm {label}
+            </label>
+          )}
+          <div style={{ position: "relative" }}>
+            <input
+              id={`${name}-cPwd`}
+              name={`${name}-cPwd`}
+              className={inputClass}
+              value={input.cPassword.value}
+              onChange={handleCPasswordChange}
+              placeholder={placeholder && `Confirm ${name}`}
+              type={input.cPassword.show ? "text" : "password"}
+              style={{
+                width: "100%",
+                border: input.cPassword.error ? "2px solid red" : "",
+              }}
+            />
+            {requiresTogglingVisibility && (
+              <img
+                alt={input.cPassword.show ? "show" : "hide"}
+                src={input.cPassword.show ? showPwd : hidePwd}
+                className={toggleVisibilityClass}
+                onClick={() => {
+                  setInput((prev) => ({
+                    ...prev,
+                    cPassword: {
+                      ...prev.cPassword,
+                      show: !prev.cPassword.show,
+                    },
+                  }));
+                }}
+              />
+            )}
+          </div>
+          {input.cPassword.error && (
+            <p className={errorClass}>{input.cPassword.error}</p>
+          )}
         </div>
-        {input.cPassword.error && (
-          <p className={errorClass}>{input.cPassword.error}</p>
-        )}
-      </div>
+      )}
     </>
   );
 });
