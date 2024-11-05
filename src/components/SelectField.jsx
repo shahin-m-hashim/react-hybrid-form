@@ -13,8 +13,6 @@ const SelectField = forwardRef(function SelectField(
     throw new Error("Select field requires options");
   }
 
-  console.log(`Select field ${name} rendered`);
-
   const [selected, setSelected] = useState(options[0].value);
 
   const handleChange = (e) => setSelected(e.target.value);

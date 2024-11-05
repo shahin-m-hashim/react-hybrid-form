@@ -24,8 +24,6 @@ const InputField = forwardRef(function InputField(
     throw new Error("Input field requires a type");
   }
 
-  console.log(`Input field ${name} rendered`);
-
   const [input, setInput] = useState({
     value: defaultValue || "",
     error: null,

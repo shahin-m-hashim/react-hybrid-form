@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { forwardRef, useState, useImperativeHandle } from "react";
 
-import showPwd from "../assets/showPwd.png";
-import hidePwd from "../assets/hidePwd.png";
+import showPwd from "../assets/showPwd.webp";
+import hidePwd from "../assets/hidePwd.webp";
 
 const PasswordField = forwardRef(function PasswordField(
   {
@@ -24,8 +24,6 @@ const PasswordField = forwardRef(function PasswordField(
   if (!validate) {
     throw new Error("Password field requires a validation function");
   }
-
-  console.log(`Password field ${name} rendered`);
 
   const [input, setInput] = useState({
     password: {

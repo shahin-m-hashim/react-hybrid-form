@@ -25,10 +25,10 @@ const validateDescription = (value) => {
 const validatePassword = (value) => {
   if (!value) {
     return "Password is required";
-  } else if (value.length < 3) {
-    return "Password must be at least 3 characters";
-  } else if (value.length > 5) {
-    return "Password must be at most 5 characters";
+  } else if (value.length < 8) {
+    return "Password must be at least 8 characters";
+  } else if (value.length > 20) {
+    return "Password must be at most 20 characters";
   }
 
   return null;

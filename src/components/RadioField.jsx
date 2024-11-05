@@ -13,8 +13,6 @@ const RadioField = forwardRef(function RadioField(
     throw new Error("Radio field requires options");
   }
 
-  console.log(`Radio field ${name} rendered`);
-
   const [selected, setSelected] = useState(options[0].value);
 
   const getValue = () => selected;

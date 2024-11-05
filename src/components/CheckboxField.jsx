@@ -13,8 +13,6 @@ const CheckboxField = forwardRef(function CheckboxField(
     throw new Error("Checkbox field requires options");
   }
 
-  console.log(`Checkbox field ${name} rendered`);
-
   const [selected, setSelected] = useState([]);
 
   const handleChange = (e) => {

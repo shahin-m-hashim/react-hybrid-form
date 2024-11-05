@@ -1,7 +1,5 @@
 import { useState } from "react";
 import HybridForm from "./components/HybridForm";
-import ControlledForm from "./components/comparison/ControlledForm";
-import UncontrolledForm from "./components/comparison/UnControlledForm";
 
 function App() {
   const [render, setRender] = useState(0);
@@ -10,12 +8,7 @@ function App() {
 
   return (
     <main className="app">
-      {/* <UncontrolledForm /> */}
-      {/* <ControlledForm /> */}
-      {Array.from({ length: 100 }).map((_, i) => (
-        <UncontrolledForm key={i} />
-      ))}
-
+      <HybridForm />
       <div
         style={{
           top: "1rem",

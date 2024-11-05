@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { memo, useRef, useState } from "react";
 import {
   validateName,
   validateEmail,
@@ -7,10 +7,12 @@ import {
   validateDescription,
 } from "../../utils/validator";
 
-import showPwd from "../../assets/showPwd.png";
-import hidePwd from "../../assets/hidePwd.png";
+import showPwd from "../../assets/showPwd.webp";
+import hidePwd from "../../assets/hidePwd.webp";
 
-export default function UncontrolledForm() {
+const UncontrolledForm = memo(function UncontrolledForm() {
+  console.log("Uncontrolled Form rendered");
+
   const nameRef = useRef();
   const emailRef = useRef();
   const genderRef = useRef();
@@ -298,4 +300,6 @@ export default function UncontrolledForm() {
       </div>
     </form>
   );
-}
+});
+
+export default UncontrolledForm;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import {
   validateName,
   validateEmail,
@@ -7,10 +7,12 @@ import {
   validateDescription,
 } from "../../utils/validator";
 
-import showPwd from "../../assets/showPwd.png";
-import hidePwd from "../../assets/hidePwd.png";
+import showPwd from "../../assets/showPwd.webp";
+import hidePwd from "../../assets/hidePwd.webp";
 
-export default function ControlledForm() {
+const ControlledForm = memo(function ControlledForm() {
+  console.log("Controlled Form rendered");
+
   const [inputs, setInputs] = useState({
     name: { value: "", error: null },
     email: { value: "", error: null },
@@ -356,4 +358,6 @@ export default function ControlledForm() {
       </div>
     </form>
   );
-}
+});
+
+export default ControlledForm;

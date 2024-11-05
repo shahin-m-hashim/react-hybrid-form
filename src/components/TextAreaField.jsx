@@ -21,8 +21,6 @@ const TextAreaField = forwardRef(function TextAreaField(
     throw new Error("Text area field requires a name");
   }
 
-  console.log(`Text area field ${name} rendered`);
-
   const [input, setInput] = useState({
     value: defaultValue || "",
     error: null,

@@ -16,7 +16,7 @@ import {
 } from "../utils/validator";
 
 const HybridForm = memo(function HybridForm() {
-  console.log("Form rendered");
+  console.log("Hybrid Form rendered");
 
   const [register, getFormData, resetForm] = useHybridForm();
 
@@ -81,8 +81,8 @@ const HybridForm = memo(function HybridForm() {
         />
 
         <PasswordField
-          label="Password:"
           name="password"
+          label="Password:"
           labelClass="label"
           fieldClass="field"
           inputClass="input"
@@ -117,10 +117,10 @@ const HybridForm = memo(function HybridForm() {
 
         <SelectField
           name="question"
-          label="Capital of India?"
           fieldClass="field"
           labelClass="label"
           optionsClass="input"
+          label="Capital of India?"
           options={[
             { value: "Punjab", label: "Punjab" },
             { value: "Kerala", label: "Kerala" },
@@ -134,8 +134,8 @@ const HybridForm = memo(function HybridForm() {
           label="Gender?"
           fieldClass="field"
           labelClass="label"
-          optionsClass="options"
           optionClass="option"
+          optionsClass="options"
           options={[
             { value: "male", label: "Male" },
             { value: "female", label: "Female" },
@@ -148,8 +148,8 @@ const HybridForm = memo(function HybridForm() {
           label="Interests?"
           labelClass="label"
           fieldClass="field"
-          optionsClass="options"
           optionClass="option"
+          optionsClass="options"
           options={[
             { value: "eat", label: "Eat" },
             { value: "play", label: "Play" },
