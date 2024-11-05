@@ -22,8 +22,8 @@ PERFORMANCE REPORT
 
     ## Interactions
         input fields = 14ms
-        submit & reset buttons = 24ms
-        select & dueDate fields = 40ms
+        submit & reset buttons = 20ms
+        select & dueDate fields = 24ms
 
 
 
@@ -73,4 +73,4 @@ PERFORMANCE REPORT
     ## Interactions
         input fields = 14ms
         submit & reset buttons = 24ms
-        select & dueDate fields = 40ms
+        select & dueDate fields = 30ms
