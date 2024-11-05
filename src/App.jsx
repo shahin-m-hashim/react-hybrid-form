@@ -1,5 +1,7 @@
 import { useState } from "react";
-import Form from "./components/Form";
+import HybridForm from "./components/HybridForm";
+import ControlledForm from "./components/comparison/ControlledForm";
+import UncontrolledForm from "./components/comparison/UnControlledForm";
 
 function App() {
   const [render, setRender] = useState(0);
@@ -8,20 +10,31 @@ function App() {
 
   return (
     <main className="app">
-      <Form />
-      <button
+      {/* <UncontrolledForm /> */}
+      {/* <ControlledForm /> */}
+      {Array.from({ length: 100 }).map((_, i) => (
+        <UncontrolledForm key={i} />
+      ))}
+
+      <div
         style={{
-          position: "absolute",
           top: "1rem",
           right: "1rem",
-          width: "5rem",
-          color: "black",
-          backgroundColor: "red",
+          position: "absolute",
         }}
-        onClick={() => setRender((prev) => prev + 1)}
       >
-        Render
-      </button>
+        <button
+          style={{
+            color: "black",
+            padding: ".5rem",
+            fontSize: ".75em",
+            backgroundColor: "red",
+          }}
+          onClick={() => setRender((prev) => prev + 1)}
+        >
+          Render
+        </button>
+      </div>
     </main>
   );
 }

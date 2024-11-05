@@ -1,6 +1,9 @@
 /* eslint-disable react/prop-types */
 import { forwardRef, useState, useImperativeHandle } from "react";
 
+import showPwd from "../assets/showPwd.png";
+import hidePwd from "../assets/hidePwd.png";
+
 const PasswordField = forwardRef(function PasswordField(
   {
     name,
@@ -28,10 +31,12 @@ const PasswordField = forwardRef(function PasswordField(
     password: {
       value: "",
       error: null,
+      show: false,
     },
     cPassword: {
       value: "",
       error: null,
+      show: false,
     },
   });
 
@@ -81,8 +86,8 @@ const PasswordField = forwardRef(function PasswordField(
 
   const reset = () =>
     setInput({
-      password: { value: "", error: null },
-      cPassword: { value: "", error: null },
+      password: { value: "", error: null, show: false },
+      cPassword: { value: "", error: null, show: false },
     });
 
   const validateOnSubmit = () => {
@@ -105,16 +110,37 @@ const PasswordField = forwardRef(function PasswordField(
             {label}
           </label>
         )}
-        <input
-          id={name}
-          name={name}
-          type="password"
-          className={inputClass}
-          placeholder={placeholder}
-          value={input.password.value}
-          onChange={handlePasswordChange}
-          style={{ border: input.password.error ? "2px solid red" : "" }}
-        />
+
+        <div style={{ position: "relative" }}>
+          <input
+            id={name}
+            name={name}
+            className={inputClass}
+            placeholder={placeholder}
+            value={input.password.value}
+            onChange={handlePasswordChange}
+            type={input.password.show ? "text" : "password"}
+            style={{ border: input.password.error ? "2px solid red" : "" }}
+          />
+          <img
+            alt={input.password.show ? "show" : "hide"}
+            src={input.password.show ? showPwd : hidePwd}
+            style={{
+              top: "0.4rem",
+              right: "0.5rem",
+              width: "1.25em",
+              cursor: "pointer",
+              position: "absolute",
+            }}
+            onClick={() => {
+              setInput((prev) => ({
+                ...prev,
+                password: { ...prev.password, show: !prev.password.show },
+              }));
+            }}
+          />
+        </div>
+
         {input.password.error && (
           <p className={errorClass}>{input.password.error}</p>
         )}
@@ -126,16 +152,35 @@ const PasswordField = forwardRef(function PasswordField(
             Confirm {label}
           </label>
         )}
-        <input
-          type="password"
-          id={`${name}-cPwd`}
-          name={`${name}-cPwd`}
-          className={inputClass}
-          value={input.cPassword.value}
-          placeholder="Confirm Password"
-          onChange={handleCPasswordChange}
-          style={{ border: input.cPassword.error ? "2px solid red" : "" }}
-        />
+        <div style={{ position: "relative" }}>
+          <input
+            id={`${name}-cPwd`}
+            name={`${name}-cPwd`}
+            className={inputClass}
+            value={input.cPassword.value}
+            placeholder="Confirm Password"
+            onChange={handleCPasswordChange}
+            type={input.cPassword.show ? "text" : "password"}
+            style={{ border: input.cPassword.error ? "2px solid red" : "" }}
+          />
+          <img
+            alt={input.cPassword.show ? "show" : "hide"}
+            src={input.cPassword.show ? showPwd : hidePwd}
+            style={{
+              top: "0.4rem",
+              right: "0.5rem",
+              width: "1.25em",
+              cursor: "pointer",
+              position: "absolute",
+            }}
+            onClick={() => {
+              setInput((prev) => ({
+                ...prev,
+                cPassword: { ...prev.cPassword, show: !prev.cPassword.show },
+              }));
+            }}
+          />
+        </div>
         {input.cPassword.error && (
           <p className={errorClass}>{input.cPassword.error}</p>
         )}

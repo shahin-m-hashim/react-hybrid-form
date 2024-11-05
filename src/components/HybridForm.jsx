@@ -15,7 +15,7 @@ import {
   validateDescription,
 } from "../utils/validator";
 
-const Form = memo(function Form() {
+const HybridForm = memo(function HybridForm() {
   console.log("Form rendered");
 
   const [register, getFormData, resetForm] = useHybridForm();
@@ -64,7 +64,6 @@ const Form = memo(function Form() {
           inputClass="input"
           errorClass="err-txt"
           ref={register("dueDate")}
-          defaultValue="2024-11-12"
           validate={validateDueDate}
         />
 
@@ -76,18 +75,19 @@ const Form = memo(function Form() {
           fieldClass="field"
           inputClass="input"
           errorClass="err-txt"
+          placeholder="Email"
           ref={register("email")}
           validate={validateEmail}
         />
 
         <PasswordField
           label="Password:"
-          name="password1"
+          name="password"
           labelClass="label"
           fieldClass="field"
           inputClass="input"
           errorClass="err-txt"
-          ref={register("pwd1")}
+          ref={register("password")}
           validate={validatePassword}
           placeholder="Enter password"
         />
@@ -169,4 +169,4 @@ const Form = memo(function Form() {
   );
 });
 
-export default Form;
+export default HybridForm;
