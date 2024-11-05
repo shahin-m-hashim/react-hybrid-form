@@ -22,6 +22,8 @@ const InputField = forwardRef(function InputField(
     throw new Error("Input field requires a name");
   } else if (!type) {
     throw new Error("Input field requires a type");
+  } else if (!label && !placeholder) {
+    throw new Error("Input field requires a label or placeholder");
   }
 
   const [input, setInput] = useState({
