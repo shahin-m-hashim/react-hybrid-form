@@ -1,9 +1,6 @@
 /* eslint-disable react/prop-types */
 import { forwardRef, useState, useImperativeHandle } from "react";
 
-import showPwd from "../assets/showPwd.webp";
-import hidePwd from "../assets/hidePwd.webp";
-
 const PasswordField = forwardRef(function PasswordField(
   {
     name,
@@ -14,6 +11,8 @@ const PasswordField = forwardRef(function PasswordField(
     labelClass,
     errorClass,
     placeholder,
+    showPasswordIcon = "",
+    hidePasswordIcon = "",
     toggleVisibilityClass,
     requiresConfirmation = true,
     requiresTogglingVisibility = true,
@@ -133,7 +132,7 @@ const PasswordField = forwardRef(function PasswordField(
           {requiresTogglingVisibility && (
             <img
               alt={input.password.show ? "show" : "hide"}
-              src={input.password.show ? showPwd : hidePwd}
+              src={input.password.show ? showPasswordIcon : hidePasswordIcon}
               className={toggleVisibilityClass}
               onClick={() => {
                 setInput((prev) => ({
@@ -174,7 +173,7 @@ const PasswordField = forwardRef(function PasswordField(
             {requiresTogglingVisibility && (
               <img
                 alt={input.cPassword.show ? "show" : "hide"}
-                src={input.cPassword.show ? showPwd : hidePwd}
+                src={input.cPassword.show ? showPasswordIcon : hidePasswordIcon}
                 className={toggleVisibilityClass}
                 onClick={() => {
                   setInput((prev) => ({

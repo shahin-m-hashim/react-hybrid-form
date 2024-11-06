@@ -377,6 +377,9 @@ import {
   validateDescription,
 } from "../utils/validator";
 
+import showPwd from "../assets/showPwd.webp";
+import hidePwd from "../assets/hidePwd.webp";
+
 const HybridForm = memo(function HybridForm() {
   console.log("Hybrid Form rendered");
 
@@ -450,6 +453,8 @@ const HybridForm = memo(function HybridForm() {
           inputClass="input"
           errorClass="err-txt"
           ref={register("password")}
+          showPasswordIcon={showPwd}
+          hidePasswordIcon={hidePwd}
           validate={validatePassword}
           placeholder="Enter password"
           toggleVisibilityClass="togglePwdVisibility"
