@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "rootDir": ".",
+    "target": "ES5",
+    "outDir": "dist",
+    "jsx": "react-jsx",
+    "sourceMap": true,
+    "module": "ES2020",
+    "declaration": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "lib": ["ES2018", "DOM"],
+    "declarationDir": "types",
+    "moduleResolution": "Node",
+    "emitDeclarationOnly": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}

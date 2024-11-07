@@ -1,7 +1,5 @@
-<div style="text-align: center;">
-
-![RHF_banner](./RHF_banner.png "Banner")
-
+<div align="center">
+  <img src="./RHF_banner.png" alt="Banner" title="Banner">
 </div>
 
 # Introduction
@@ -33,6 +31,8 @@ seamless integration with minimal code.
 - Advanced Password Handling: Enjoy built-in support for password confirmation logic and toggling visibility with minimal setup.
 
 - Clarity and Simplicity: Write forms in a way that is easy to read and maintain, promoting a clear and understandable codebase.
+
+- TypeScript Support: Enjoy full TypeScript support for strong typing, enhanced autocompletion, and error detection during development. Benefit from out-of-the-box types for form fields, validation, and submission handling, ensuring type safety and reducing runtime errors.
 
 # Why choose this over others ?
 
