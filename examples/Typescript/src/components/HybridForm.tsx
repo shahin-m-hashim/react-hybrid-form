@@ -10,12 +10,12 @@ import {
   useHybridForm,
 } from "react-hybrid-form";
 
-// This Version of HybridForm is the least styled.
+// The styled and validated examples are available in the javascript folder
 
-const HybridFormV1 = memo(function HybridForm() {
+const HybridForm = memo(function HybridForm() {
   const [register, getFormData, resetForm] = useHybridForm();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const data = getFormData();
@@ -52,8 +52,8 @@ const HybridFormV1 = memo(function HybridForm() {
       />
 
       <TextAreaField
-        rows="5"
-        cols="10"
+        rows={5}
+        cols={10}
         name="description"
         label="Description:"
         ref={register("description")}
@@ -92,14 +92,10 @@ const HybridFormV1 = memo(function HybridForm() {
         ref={register("interests")}
       />
       <div style={{ display: "flex", gap: "1rem" }}>
-        <button style={{ padding: ".25rem .5rem" }} type="submit">
+        <button className="submit-btn" type="submit">
           Submit
         </button>
-        <button
-          type="reset"
-          onClick={resetForm}
-          style={{ padding: ".25rem .5rem" }}
-        >
+        <button type="reset" onClick={resetForm} className="reset-btn">
           Reset
         </button>
       </div>
@@ -107,4 +103,4 @@ const HybridFormV1 = memo(function HybridForm() {
   );
 });
 
-export default HybridFormV1;
+export default HybridForm;

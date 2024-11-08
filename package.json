@@ -6,10 +6,11 @@
     "dist",
     "docs",
     "LICENSE",
+    "examples",
     "README.md",
     "CHANGELOG.md",
     "package.json",
-    "RHF_banner.png"
+    "RHF_banner.webp"
   ],
   "types": "dist/index.d.ts",
   "scripts": {

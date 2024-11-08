@@ -1,5 +1,23 @@
 <div align="center">
-  <img src="./RHF_banner.png" alt="Banner" title="Banner">
+  <img src="./RHF Banner.webp" alt="Banner">
+</div>
+
+<div align="center" style="margin-top: .5rem;">
+  <a href="https://github.com/shahin-m-hashim" target="_blank">
+    <img alt="Creator" src="https://img.shields.io/badge/%40shahinmhashim-blue">
+  </a>
+  <img alt="Package Version" src="https://img.shields.io/badge/v1.0.0-brightgreen">
+  <a href="./LICENSE" target="_blank">
+    <img alt="License" src="https://img.shields.io/badge/license-MIT-red">
+  </a>
+  <img alt="NPM Version" src="https://img.shields.io/npm/v/react">
+  <img alt="Zipped Size" src="https://img.shields.io/badge/40%20kb%20zipped-gold">
+  <a href="https://github.com/shahin-m-hashim/react-hybrid-form" target="_blank">
+    <img alt="Repository" src="https://img.shields.io/badge/repository-black?logo=github">
+  </a>
+  <a href="https://github.com/shahin-m-hashim/react-hybrid-form/tree/master/examples" target="_blank">
+  <img alt="Static Badge" src="https://img.shields.io/badge/examples-purple">
+  </a>
 </div>
 
 # Introduction
@@ -16,9 +34,7 @@ seamless integration with minimal code.
 
 - Hybrid Approach: Leverage the speed and efficiency of uncontrolled forms while enjoying real-time validation of individual fields for an enhanced user experience.
 
-- Effortless Integration: Set up forms quickly and easily, ensuring a smooth start without hassle.
-
-- Simplicity and Readability: Integrate forms seamlessly with a straightforward API that resembles standard HTML forms, resulting in clean, maintainable code.
+- Simplicity and Readability: Integrate and set up forms quickly and easily, ensuring a smooth start without hassle.
 
 - Optimized Performance: Achieve high performance for both simple and complex forms without the overhead typically found in other libraries.
 
@@ -30,13 +46,11 @@ seamless integration with minimal code.
 
 - Advanced Password Handling: Enjoy built-in support for password confirmation logic and toggling visibility with minimal setup.
 
-- Clarity and Simplicity: Write forms in a way that is easy to read and maintain, promoting a clear and understandable codebase.
-
-- TypeScript Support: Enjoy full TypeScript support for strong typing, enhanced autocompletion, and error detection during development. Benefit from out-of-the-box types for form fields, validation, and submission handling, ensuring type safety and reducing runtime errors.
+- Type Script Support: Enjoy full TypeScript support for strong typing, enhanced autocompletion, and error detection during development. Benefit from out-of-the-box types for form fields, validation, and submission handling, ensuring type safety and reducing runtime errors.
 
 # Why choose this over others ?
 
-Popular form libraries offer robust features, but often add unnecessary complexity and performance overhead. Here’s how this hybrid form library streamlines the process:
+Popular form libraries offer robust features, but often add unnecessary complexity and performance overhead for something simple. Here’s how this hybrid form library streamlines the process:
 
 1. Performance Without Complexity -
 
@@ -46,15 +60,21 @@ Popular form libraries offer robust features, but often add unnecessary complexi
 
 2. Simple, Minimal API -
 
-   - Other Libraries: Typically involve multiple hooks and configurations, which can feel overwhelming for simple forms. React Hook Form and Formik, for example, use complex setups like Controller and useForm to manage state and validation.
+   - Other Libraries: Typically involve multiple hooks and configurations, which can feel overwhelming for simple forms.
 
-   - This Library: Provides just three core functions—register, getFormData, and resetForm—keeping the API lean and straightforward for any form setup.
+   - This Library: Provides just three core functions keeping the API lean and straightforward for any form setup.
 
-3. Low Learning Curve -
+3. Very Low Learning Curve -
 
-- Other Libraries: Require familiarity with advanced React patterns and extensive documentation, which can slow down development, especially for simpler projects.
+- Other Libraries: Require familiarity with advanced React patterns and extensive documentation, which can slow down development, especially for beginners.
 
 - This Library: Designed for clarity and ease of use, allowing even beginners to quickly set up and manage forms without extensive prerequisites.
+
+4. Extremely Light Weight
+
+   - Other Libraries: Libraries like Formik and React Hook Form can be hefty, often exceeding hundreds of kilobytes.
+
+   - This Library: Coming in at an ultra-light 81.7 KB, it's designed to provide many features without the bloat, ensuring fast loading times and better performance for your app.
 
 # Installation
 
@@ -73,8 +93,7 @@ Start by creating your form component and using the useHybridForm hook to manage
 The form has just 3 simple and straightforward api -
 
 1. register() - attaches to the form fields and is critical for functioning
-2. getFormData() - returns entire form data if every validation
-   passes.
+2. getFormData() - returns entire form data if every validation passes.
 3. resetForm() - resets the entire form to its default.
 
 ```
@@ -122,18 +141,20 @@ Use the register function to integrate each form field. This function automatica
 
 ### Dedicated Field Components:-
 
-Each field component is specialized for its input type, offering a consistent API and handling common validation requirements.
+Each field component is specialized for its input type, offering a consistent API and handling common validation requirements. All fields require a name prop and a ref prop attached to register function.
+The name specified in the field should match the name passed to the register function.
 
 1. Standard Input Field:
 
-   **Requires** - name, type and must have either a label or a placeholder.
-
    ```
    <InputField
-      type="text"
-      name="username"
-      placeholder="Username"
-      ref={register("username")}
+      name="username" // required
+      defaultValue="" // optional and defaults to ""
+      type="text" // default is text
+      validate={validationFn()} // optional
+      ref={register("username")} // required
+      placeholder="username" // optional if label is provided
+      label="Username: " // optional if placeholder is provided
    />
    ```
 
@@ -142,67 +163,64 @@ Each field component is specialized for its input type, offering a consistent AP
    - Built in password visibility toggling
    - Automatic and easy confirm password validation
 
-   **Requires** - same as standard input.
+   **requiresConfirmation** & **requiresTogglingVisibility** are special props to enable or disable the confirm password feature or the password visibility toggling feature.
 
    ```
    <PasswordField
-      name="password"
-      label="Password"
-      ref={register("password")}
-      validate={validatePassword}
+      name="password" // required
+      ref={register("password")} // required
+      validate={validatePassword} // required
+      placeholder="password" // optional if label is provided
+      requiresConfirmation={false} // Optional, default is true
+      label="Password: " // optional if placeholder is provided
+      requiresTogglingVisibility={false} // Optional, default is true
    />
    ```
 
-   Extra props specific to this field -
-
-   **_requiresConfirmation_** & **_requiresTogglingVisibility_** are two props which by default has boolean value true. Incase you want to disable them explicitly set it to false while creating the field.
+3. Text Area Field:
 
    ```
-   <PasswordField
-      name="password"
-      label="Password"
-      ref={register("password")}
-      validate={validatePassword}
-      requiresConfirmation={false}
-      requiresTogglingVisibility={false}
+   <TextAreaField
+      name="bio" // required
+      ref={register("bio")} // required
+      validate={validationFn()} // optional
+      defaultValue="" // optional and defaults to ""
+      placeholder="bio" // optional if label is provided
+      label="Bio: " // optional if placeholder is provided
    />
    ```
 
-3. Radio, Select and Checkbox Fields:
-
-   - defaults to first option (except checkbox)
-
-   **Requires** - name, label and at least one option.
+4. Radio, Select and Checkbox Fields:
 
    ```
    <SelectField
-       name="country"
-       label="Country"
+       name="country" // required
+       label="Country" // required
        options={[
            { value: "usa", label: "USA" },
            { value: "canada", label: "Canada" },
-       ]}
-       ref={register("country")}
+       ]} // required & defaults to 1st option
+       ref={register("country")} // required
    />
 
    <RadioField
-       name="gender"
-       label="Gender"
+       name="gender" // required
+       label="Gender" // required
        options={[
            { value: "male", label: "Male" },
            { value: "female", label: "Female" },
-       ]}
-       ref={register("gender")}
+       ]} // required & defaults to 1st option
+       ref={register("gender")} // required
    />
 
    <CheckBoxField
-       name="interests"
-       label="Interests"
+       name="interests" // required
+       label="Interests" // required
        options={[
            { value: "sports", label: "Sports" },
            { value: "music", label: "Music" },
-       ]}
-       ref={register("interests")}
+       ]} // required & defaults to 1st option
+       ref={register("interests")} // required
    />
    ```
 
@@ -220,7 +238,6 @@ const validateUsername = (value) => {
 };
 
 <InputField
-  type="text"
   name="username"
   ref={register("username")}
   validate={validateUsername}
@@ -252,56 +269,10 @@ Specific styling class Props
 |      optionClass      |     Styles individual options     |       RadioField, CheckboxField        |
 | toggleVisibilityClass | Styles the visibility toggle icon |             PasswordField              |
 
-Recommended Way of using custom styling or other classes -
+Recommended way to style using classes (
+custom, tailwind, bootstrap ...etc) -
 
-```
-  <InputField
-    labelClass="label"
-    fieldClass="field"
-    inputClass="input"
-    errorClass="err-txt"
-  />
-
-  <PasswordField
-    labelClass="label"
-    fieldClass="field"
-    inputClass="input"
-    errorClass="err-txt"
-    toggleVisibilityClass="togglePwdVisibility"
-  />
-
-  <TextAreaField
-    rows="5"
-    cols="10"
-    labelClass="label"
-    fieldClass="field"
-    errorClass="err-txt"
-    textareaClass="textarea"
-  />
-
-  <SelectField
-    fieldClass="field"
-    labelClass="label"
-    optionsClass="input"
-  />
-
-  <RadioField
-    fieldClass="field"
-    labelClass="label"
-    optionClass="option"
-    optionsClass="options"
-  />
-
-  <CheckboxField
-    labelClass="label"
-    fieldClass="field"
-    optionClass="option"
-    optionsClass="options"
-  />
-
-```
-
-### CSS (index.css) -
+### Custom CSS Example -
 
 ```
   .field {
@@ -354,194 +325,70 @@ Recommended Way of using custom styling or other classes -
   }
 ```
 
-# Complete Form Example -
+JSX -
 
 ```
-import { memo } from "react";
+  <InputField
+    labelClass="text-lg text-black md:text-semibold"
+    fieldClass="field"
+    inputClass="input"
+    errorClass="err-txt"
+  />
 
-import {
-  InputField,
-  RadioField,
-  SelectField,
-  TextAreaField,
-  CheckboxField,
-  PasswordField,
-  useHybridForm,
-} from "react-hybrid-form";
+  <PasswordField
+    labelClass="label"
+    fieldClass="flex flex-column gap-2"
+    inputClass="input"
+    errorClass="err-txt"
+    toggleVisibilityClass="togglePwdVisibility"
+  />
 
-import {
-  validateName,
-  validateEmail,
-  validateDueDate,
-  validatePassword,
-  validateDescription,
-} from "../utils/validator";
+  <TextAreaField
+    rows={5}
+    cols={10}
+    labelClass="label"
+    fieldClass="field"
+    errorClass="text-red-500 text-sm"
+    textareaClass="textarea"
+  />
 
-import showPwd from "../assets/showPwd.webp";
-import hidePwd from "../assets/hidePwd.webp";
+  <SelectField
+    fieldClass="field"
+    labelClass="label"
+    optionsClass="flex gap-2
+  />
 
-const HybridForm = memo(function HybridForm() {
-  console.log("Hybrid Form rendered");
+  <RadioField
+    fieldClass="field"
+    labelClass="label"
+    optionClass="flex gap-1"
+    optionsClass="options"
+  />
 
-  const [register, getFormData, resetForm] = useHybridForm();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const data = getFormData();
-
-    if (data) {
-      console.log(data);
-      resetForm();
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <div
-        style={{
-          flex: "1",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-        }}
-      >
-        <InputField
-          type="text"
-          name="name"
-          label="Name:"
-          autoComplete="on"
-          placeholder="Name"
-          labelClass="label"
-          fieldClass="field"
-          inputClass="input"
-          errorClass="err-txt"
-          ref={register("name")}
-          validate={validateName}
-        />
-
-        <InputField
-          type="date"
-          name="dueDate"
-          label="Due Date:"
-          labelClass="label"
-          fieldClass="field"
-          inputClass="input"
-          errorClass="err-txt"
-          ref={register("dueDate")}
-          validate={validateDueDate}
-        />
-
-        <InputField
-          type="email"
-          name="email"
-          label="Email:"
-          labelClass="label"
-          fieldClass="field"
-          inputClass="input"
-          errorClass="err-txt"
-          placeholder="Email"
-          ref={register("email")}
-          validate={validateEmail}
-        />
-
-        <PasswordField
-          name="password"
-          label="Password:"
-          labelClass="label"
-          fieldClass="field"
-          inputClass="input"
-          errorClass="err-txt"
-          ref={register("password")}
-          showPasswordIcon={showPwd}
-          hidePasswordIcon={hidePwd}
-          validate={validatePassword}
-          placeholder="Enter password"
-          toggleVisibilityClass="togglePwdVisibility"
-        />
-      </div>
-
-      <div
-        style={{
-          flex: "1",
-          gap: "1rem",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <TextAreaField
-          rows="5"
-          cols="10"
-          name="description"
-          labelClass="label"
-          fieldClass="field"
-          label="Description:"
-          errorClass="err-txt"
-          textareaClass="textarea"
-          placeholder="Description"
-          ref={register("description")}
-          validate={validateDescription}
-        />
-
-        <SelectField
-          name="question"
-          fieldClass="field"
-          labelClass="label"
-          optionsClass="input"
-          label="Capital of India?"
-          options={[
-            { value: "Punjab", label: "Punjab" },
-            { value: "Kerala", label: "Kerala" },
-            { value: "New Delhi", label: "New Delhi" },
-          ]}
-          ref={register("question")}
-        />
-
-        <RadioField
-          name="gender"
-          label="Gender?"
-          fieldClass="field"
-          labelClass="label"
-          optionClass="option"
-          optionsClass="options"
-          options={[
-            { value: "male", label: "Male" },
-            { value: "female", label: "Female" },
-          ]}
-          ref={register("gender")}
-        />
-
-        <CheckBoxField
-          name="interests"
-          label="Interests?"
-          labelClass="label"
-          fieldClass="field"
-          optionClass="option"
-          optionsClass="options"
-          options={[
-            { value: "eat", label: "Eat" },
-            { value: "play", label: "Play" },
-            { value: "sleep", label: "Sleep" },
-            { value: "music", label: "Music" },
-          ]}
-          ref={register("interests")}
-        />
-        <button type="submit" className="submit-btn">
-          Submit
-        </button>
-        <button type="reset" onClick={resetForm} className="reset-btn">
-          Reset
-        </button>
-      </div>
-    </form>
-  );
-});
-
-export default HybridForm;
+  <CheckboxField
+    labelClass="label"
+    fieldClass="field"
+    optionClass="option"
+    optionsClass="options"
+  />
 
 ```
 
-# Conclusion
+## Conclusion
 
-With the Hybrid Form Library, you gain a powerful and easy-to-use tool for managing forms in React.
-Say goodbye to the complexities of traditional form libraries and embrace a solution that prioritizes performance, readability, and ease of use.
+The Hybrid Form Library is designed to streamline form handling in React, offering a blend of simplicity, performance, and flexibility. It's an ideal choice for developers who want a powerful tool without the complexity of traditional form libraries. Simplify your workflow, minimize overhead, and focus on building great user experiences.
+
+## Explore More
+
+Check out the <a style="text-decoration: underline; font-weight: 600; text-underline-offset: 3px;" href="https://github.com/shahin-m-hashim/react-hybrid-form/tree/master/examples" target="_blank">
+EXAMPLES HERE
+</a> to see how easy it is to build forms with this library. Whether you're using TypeScript or JavaScript, these demos will help you get up and running quickly.
+
+### About the Author
+
+This library is created and maintained by <a href="https://github.com/shahin-m-hashim" target="_blank">
+Shahin M Hashim</a>. Contributions are encouraged and greatly appreciated! If you have feedback or ideas, don’t hesitate to reach out or submit an issue.
+
+### LICENSE
+
+This library is open-source to support the developer community. Please respect the effort and dedication behind it by avoiding the creation of direct derivative works aimed at competing with this project. Licensed under [MIT](./LICENSE)
