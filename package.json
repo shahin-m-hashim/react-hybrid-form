@@ -1,12 +1,19 @@
 {
   "name": "react-hybrid-form",
+  "description": "A super simple, straightforward and powerful hybrid form library which combines the benefits of both controlled or uncontrolled form.",
+  "author": "shahin-m-hashim",
   "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shahin-m-hashim/react-hybrid-form"
+  },
+  "homepage": "https://github.com/shahin-m-hashim/react-hybrid-form#readme",
   "main": "dist/esm/index.js",
   "files": [
     "dist",
     "docs",
     "LICENSE",
-    "examples",
     "README.md",
     "CHANGELOG.md",
     "package.json",
@@ -16,11 +23,9 @@
   "scripts": {
     "rollup": "rollup -c --bundleConfigAsCjs"
   },
-  "author": "shahin-m-hashim",
-  "license": "Apache-2.0",
-  "description": "A super simple, straightforward and powerful hybrid form library which combines the benefits of both controlled or uncontrolled form.",
   "keywords": [
     "form",
+    "forms",
     "frontend",
     "typescript",
     "react-form",

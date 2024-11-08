@@ -11,7 +11,7 @@
     <img alt="License" src="https://img.shields.io/badge/license-MIT-red">
   </a>
   <img alt="NPM Version" src="https://img.shields.io/npm/v/react">
-  <img alt="Zipped Size" src="https://img.shields.io/badge/40%20kb%20zipped-gold">
+  <img alt="Zipped Size" src="https://img.shields.io/badge/15.8%20kb%20zipped-gold">
   <a href="https://github.com/shahin-m-hashim/react-hybrid-form" target="_blank">
     <img alt="Repository" src="https://img.shields.io/badge/repository-black?logo=github">
   </a>
@@ -72,9 +72,9 @@ Popular form libraries offer robust features, but often add unnecessary complexi
 
 4. Extremely Light Weight
 
-   - Other Libraries: Libraries like Formik and React Hook Form can be hefty, often exceeding hundreds of kilobytes.
+   - Other Libraries: Libraries like Formik, React Hook Form, Redux form ...etc can be hefty, often exceeding hundreds and thousands of kilobytes.
 
-   - This Library: Coming in at an ultra-light 81.7 KB, it's designed to provide many features without the bloat, ensuring fast loading times and better performance for your app.
+   - This Library: Coming in at an ultra-light 70 KB, it's designed to provide many features without the bloat, ensuring fast loading times and better performance for your app.
 
 # Installation
 
@@ -90,9 +90,15 @@ Start by creating your form component and using the useHybridForm hook to manage
 > - Avoid using other states inside the main form.
 > - Stick to the below pattern as much as you can.
 
+> ⚠️ **Critical Note for TypeScript Devs**:
+>
+> - TypeScript may not catch missing `ref` props in field components, which can lead to issues during runtime.
+>
+> - Always ensure you pass the `ref` (e.g., `ref = {register("name")}`) to each form field to avoid unexpected behavior.
+
 The form has just 3 simple and straightforward api -
 
-1. register() - attaches to the form fields and is critical for functioning
+1. register() - attaches to the form fields and is crucial for functioning.
 2. getFormData() - returns entire form data if every validation passes.
 3. resetForm() - resets the entire form to its default.
 
@@ -120,12 +126,12 @@ const MyForm = () => {
 
 ```
 
-### Registering Fields:-
+## Registering Fields :-
 
-> Critical -
+> ⚠️ Critical -
 >
 > - Requires field provided by the library itself.
-> - name passed to fields and register should be same.
+> - name passed to fields and register api should be same.
 > - No two fields within the form can have the same name.
 > - Must attach the register api via reference of each field.
 
@@ -133,32 +139,31 @@ Use the register function to integrate each form field. This function automatica
 
 ```
 <InputField
-  type="text"
-  name="name"
-  ref={register("name")}
+  name="username"
+  ref={register("username")}
 />
 ```
 
-### Dedicated Field Components:-
+### Dedicated Field Components :-
 
 Each field component is specialized for its input type, offering a consistent API and handling common validation requirements. All fields require a name prop and a ref prop attached to register function.
 The name specified in the field should match the name passed to the register function.
 
-1. Standard Input Field:
+1. Standard Input Field :
 
    ```
    <InputField
       name="username" // required
-      defaultValue="" // optional and defaults to ""
       type="text" // default is text
       validate={validationFn()} // optional
       ref={register("username")} // required
+      defaultValue="" // optional and defaults to ""
       placeholder="username" // optional if label is provided
       label="Username: " // optional if placeholder is provided
    />
    ```
 
-2. Dedicated Password field:
+2. Dedicated Password field :
 
    - Built in password visibility toggling
    - Automatic and easy confirm password validation
@@ -177,7 +182,7 @@ The name specified in the field should match the name passed to the register fun
    />
    ```
 
-3. Text Area Field:
+3. Text Area Field :
 
    ```
    <TextAreaField
@@ -190,7 +195,7 @@ The name specified in the field should match the name passed to the register fun
    />
    ```
 
-4. Radio, Select and Checkbox Fields:
+4. Radio, Select and Checkbox Fields :
 
    ```
    <SelectField
@@ -224,7 +229,7 @@ The name specified in the field should match the name passed to the register fun
    />
    ```
 
-## Validation
+## Validation :-
 
 The library allows for real-time validation by adding custom validation functions which can easily be passed as props to individual fields thereby centralizing and abstracting complexity. You can use external libraries like Yup or Zod or write custom validation functions directly.
 
@@ -245,7 +250,7 @@ const validateUsername = (value) => {
 
 ```
 
-## Custom Styling Options -
+## Styling :-
 
 This library is designed with flexible styling in mind, allowing custom classes for each element of a field. You can use popular styling libraries or your own custom CSS classes.
 
@@ -272,7 +277,9 @@ Specific styling class Props
 Recommended way to style using classes (
 custom, tailwind, bootstrap ...etc) -
 
-### Custom CSS Example -
+### Example :-
+
+CSS -
 
 ```
   .field {
@@ -374,21 +381,21 @@ JSX -
 
 ```
 
-## Conclusion
+## Conclusion :-
 
 The Hybrid Form Library is designed to streamline form handling in React, offering a blend of simplicity, performance, and flexibility. It's an ideal choice for developers who want a powerful tool without the complexity of traditional form libraries. Simplify your workflow, minimize overhead, and focus on building great user experiences.
 
-## Explore More
+## Explore More :-
 
 Check out the <a style="text-decoration: underline; font-weight: 600; text-underline-offset: 3px;" href="https://github.com/shahin-m-hashim/react-hybrid-form/tree/master/examples" target="_blank">
 EXAMPLES HERE
 </a> to see how easy it is to build forms with this library. Whether you're using TypeScript or JavaScript, these demos will help you get up and running quickly.
 
-### About the Author
+## About the Author
 
 This library is created and maintained by <a href="https://github.com/shahin-m-hashim" target="_blank">
 Shahin M Hashim</a>. Contributions are encouraged and greatly appreciated! If you have feedback or ideas, don’t hesitate to reach out or submit an issue.
 
-### LICENSE
+## LICENSE
 
 This library is open-source to support the developer community. Please respect the effort and dedication behind it by avoiding the creation of direct derivative works aimed at competing with this project. Licensed under [MIT](./LICENSE)

@@ -48,6 +48,8 @@ const HybridFormE1 = memo(function HybridFormE2() {
         name="password"
         label="Password:"
         ref={register("password")}
+        requiresConfirmation={false}
+        requiresTogglingVisibility={false}
         validate={(v) => (!v ? "Description is required" : "")}
       />
 
