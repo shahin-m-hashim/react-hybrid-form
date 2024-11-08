@@ -1,4 +1,9 @@
-import { useState, forwardRef, useImperativeHandle, ChangeEvent } from "react";
+import React, {
+  useState,
+  forwardRef,
+  useImperativeHandle,
+  ChangeEvent,
+} from "react";
 
 type Option = {
   label: string;

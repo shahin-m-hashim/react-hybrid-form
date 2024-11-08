@@ -195,7 +195,7 @@ Each field component is specialized for its input type, offering a consistent AP
        ref={register("gender")}
    />
 
-   <CheckboxField
+   <CheckBoxField
        name="interests"
        label="Interests"
        options={[
@@ -511,7 +511,7 @@ const HybridForm = memo(function HybridForm() {
           ref={register("gender")}
         />
 
-        <CheckboxField
+        <CheckBoxField
           name="interests"
           label="Interests?"
           labelClass="label"

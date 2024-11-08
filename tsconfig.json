@@ -1,20 +1,28 @@
 {
   "compilerOptions": {
-    "strict": true,
-    "rootDir": ".",
-    "target": "ES5",
-    "outDir": "dist",
-    "jsx": "react-jsx",
-    "sourceMap": true,
-    "module": "ES2020",
-    "declaration": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "lib": ["ES2018", "DOM"],
-    "declarationDir": "types",
-    "moduleResolution": "Node",
-    "emitDeclarationOnly": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true
-  }
+    "strict": true, // Enable all strict type-checking options
+    "noImplicitAny": true, // Disallow usage of the any type
+    "strictNullChecks": true, // Enable strict null checks
+    "rootDir": "src", // Set the root directory for your source files
+    "target": "ES2020", // Compiles the TypeScript to ES5 for wide compatibility
+    "outDir": "dist", // Outputs the compiled files to the dist directory
+    "sourceMap": true, // Generate source maps for debugging
+    "jsx": "preserve", // Keep JSX as-is for further processing
+    "module": "Preserve", // Use modern ECMAScript module system
+    "declaration": true, // Generate declaration files (.d.ts)
+    "skipLibCheck": true, // Skip type checking of declaration files for faster builds
+    "inlineSources": true, // Inline source maps for better debugging
+    "esModuleInterop": true, // Allow compatibility between ESModules and CommonJS modules
+    "removeComments": true, // Remove comments from the output
+    "lib": ["ES2020", "DOM"], // Define the libraries to include (for browser compatibility)
+    "declarationDir": "dist/esm/types", // Output the declaration files to the dist/types directory
+    "moduleResolution": "Bundler", // Use Node's module resolution strategy (important for npm packages)
+    "emitDeclarationOnly": true, // Emit only the declaration files (used for pure TS libraries)
+    "allowSyntheticDefaultImports": true, // Allows synthetic default imports from CommonJS modules
+    "forceConsistentCasingInFileNames": true, // Ensures consistent casing in file names
+    "skipDefaultLibCheck": true, // Skip type checking of default library declaration files for faster builds
+    "noEmit": false // Ensure that TypeScript generates output files (important for library builds)
+  },
+  "include": ["src/**/*"], // Include all TypeScript files in the src folder
+  "exclude": ["node_modules", "dist", "test", "docs"] // Exclude unnecessary folders from compilation
 }

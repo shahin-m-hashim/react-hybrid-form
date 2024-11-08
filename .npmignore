@@ -1,3 +1,11 @@
-docs
+*.log
+.vscode/
 .gitignore
+
+*.tsbuildinfo
+tsconfig.json
 rollup.config.js
+package-lock.json
+
+src/
+test/

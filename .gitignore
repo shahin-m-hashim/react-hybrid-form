@@ -1,3 +1,10 @@
-dist
-node_modules
-.rollup.cache
+dist/
+*.log
+.idea/
+.cache/
+.vscode/
+.DS_Store
+node_modules/
+*.tsbuildinfo
+.rollup.cache/
+package-lock.json

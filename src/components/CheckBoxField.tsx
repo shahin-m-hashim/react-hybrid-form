@@ -1,11 +1,16 @@
-import { useState, forwardRef, useImperativeHandle, ChangeEvent } from "react";
+import React, {
+  useState,
+  forwardRef,
+  ChangeEvent,
+  useImperativeHandle,
+} from "react";
 
 type Option = {
   label: string;
   value: string;
 };
 
-type CheckboxFieldProps = {
+type CheckBoxFieldProps = {
   name: string;
   label: string;
   options: Option[];
@@ -15,19 +20,19 @@ type CheckboxFieldProps = {
   optionClass?: string;
 };
 
-type CheckboxFieldRef = {
+type CheckBoxFieldRef = {
   reset: () => void;
   getValue: () => string[];
 };
 
-const CheckboxField = forwardRef<CheckboxFieldRef, CheckboxFieldProps>(
+const CheckBoxField = forwardRef<CheckBoxFieldRef, CheckBoxFieldProps>(
   (
     { name, label, options, fieldClass, labelClass, optionsClass, optionClass },
     ref
   ) => {
     if (!ref) {
       throw new Error(
-        "Critical error: Checkbox Field is not registered via ref !!!"
+        "Critical error: Checkbox field is not registered via ref !!!"
       );
     } else if (!name) {
       throw new Error("Checkbox field requires a name");
@@ -83,4 +88,4 @@ const CheckboxField = forwardRef<CheckboxFieldRef, CheckboxFieldProps>(
   }
 );
 
-export default CheckboxField;
+export default CheckBoxField;

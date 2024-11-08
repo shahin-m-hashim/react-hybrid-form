@@ -1,4 +1,9 @@
-import { forwardRef, useState, ChangeEvent, useImperativeHandle } from "react";
+import React, {
+  forwardRef,
+  useState,
+  ChangeEvent,
+  useImperativeHandle,
+} from "react";
 
 type InputFieldProps = {
   type?:
@@ -57,7 +62,7 @@ const InputField = forwardRef<InputFieldRef, InputFieldProps>(
   ) => {
     if (!ref) {
       throw new Error(
-        "Critical error: InputField is not registered via ref !!!"
+        "Critical error: Input field is not registered via ref !!!"
       );
     } else if (!name) {
       throw new Error("Input field requires a name");

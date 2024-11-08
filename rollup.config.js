@@ -1,4 +1,4 @@
-import dts from "rollup-plugin-dts";
+import { dts } from "rollup-plugin-dts";
 import terser from "@rollup/plugin-terser";
 import sucrase from "@rollup/plugin-sucrase";
 import commonjs from "@rollup/plugin-commonjs";
@@ -20,8 +20,6 @@ export default [
     ],
     plugins: [
       peerDepsExternal(),
-      resolve(),
-      commonjs(),
       typescript({
         tsconfig: "./tsconfig.json",
         jsx: "preserve",
@@ -30,13 +28,15 @@ export default [
         exclude: ["node_modules/**"],
         transforms: ["typescript", "jsx"],
       }),
+      resolve(),
+      commonjs(),
       terser(),
     ],
   },
   {
     external: [/\.css$/],
-    plugins: [dts.default()],
-    input: "dist/cjs/types/src/index.d.ts",
+    plugins: [dts()],
+    input: "dist/esm/types/index.d.ts",
     output: [{ file: "dist/index.d.ts", format: "esm" }],
   },
 ];
